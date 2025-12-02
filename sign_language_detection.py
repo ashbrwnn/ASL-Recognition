@@ -212,12 +212,10 @@ import tensorflow as tf
 save_path_dir = '/content/drive/MyDrive/ASL_MODEL'
 os.makedirs(save_path_dir, exist_ok=True) # Create the directory if it doesn't exist
 
-# --- CORRECTED PART ---
 # Use the Keras .save() method directly on the model object
 keras_model_path = os.path.join(save_path_dir, 'my_asl_model.h5')
 model.save(keras_model_path)
 print(f"Keras model successfully saved to: {keras_model_path}")
-# --- END CORRECTED PART ---
 
 
 # Convert the Keras model (now saved to disk) to TensorFlow Lite format
@@ -234,8 +232,6 @@ with open(tflite_model_path, 'wb') as f:
 print(f"Model saved in TFLite format to: {tflite_model_path}")
 
 # Also save the label map (class names)
-# You need the class names for the Raspberry Pi script
-# class_names = train_ds.class_names # This line caused the error and is removed
 with open(os.path.join(save_path_dir, 'labelmap.txt'), 'w') as f:
     for name in class_names:
         f.write(f"{name}\n")
